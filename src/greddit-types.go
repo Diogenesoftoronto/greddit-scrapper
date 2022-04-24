@@ -1,4 +1,4 @@
-package gredditTypes
+package gredditScrapper
 
 // Go-Reddit Scrapper Schema
 // export interface IRedditCredentials {
@@ -50,7 +50,7 @@ func (st *SortType) UnmarshalJSON(b []byte) error {
 			*st = sortType
 			return nil
 	}
-	return errors.New("Invalid leave type")
+	return errors.New("invalid sort type")
 }
 
 func (st SortType) IsValid() error {
@@ -58,7 +58,7 @@ func (st SortType) IsValid() error {
 	case hot, top, latest, rising:
 		return nil
 	}
-	return errors.New("Invalid leave type")
+	return errors.New("invalid sort type")
 }
 // export interface IAPIUrl {
 // 	AccessToken: string;
