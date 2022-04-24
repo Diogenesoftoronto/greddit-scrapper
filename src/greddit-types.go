@@ -29,9 +29,7 @@ type IRequestOptions struct {
 
 
 // date type is ambigous
-type Date struct {
- Date string
-}
+type Date string
 
 type SortType string
 
