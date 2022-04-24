@@ -10,6 +10,48 @@
 // 	IPageListingResults,
 // } from "./RedditScraper.types";
 
+package gredditScrapper
+
+import (
+	"encoding/json"
+	"errors"
+)
+
+
+type GredditScraper struct {
+	AccessToken string
+	AuthToken string
+	NextPage string 
+	PreviousPage string
+	API_URL IAPIURL
+}
+
+type IAPIURL string
+
+const (
+	AccessToken IAPIURL =  "https://www.reddit.com/api/v1/access_token"
+	GetData IAPIURL = "https://oauth.reddit.com/r/"
+)
+
+func (apit *IAPIURL) UnmarshalJSON(b []byte) error {
+	var s string
+	json.Unmarshal(b, &s)
+	API_URL := IAPIURL(s)
+	switch API_URL {
+	case AccessToken, GetData:
+			*apit = API_URL
+			return nil
+	}
+	return errors.New("invalid sort type")
+}
+
+func (apit IAPIURL) IsValid() error {
+	switch apit {
+	case AccessToken, GetData:
+		return nil
+	}
+	return errors.New("invalid APIURL type")
+}
 // export class RedditScraper {
 
 // 	private AccessToken: string;
