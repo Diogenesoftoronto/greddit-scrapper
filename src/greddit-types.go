@@ -16,22 +16,21 @@ type IRedditCredentials struct {
 	AppId, AppSecret string
 }
 
-// export interface IRequestOptions {
-// 	SubReddit: string;
-// 	SortType: "hot" | "new" | "rising" | "top";
-// 	Pages: number;
-// 	Records: number;
-// 	BeforeDate?: Date;
-// 	FullName?: string;
-// }
 
-type IRedditCredentials struct {
+//  nullability is not offered in go
+type IRequestOptions struct {
 	SubReddit  string
 	sortType   SortType
 	Pages      int
 	Records    int
 	BeforeDate Date
 	FullName   string
+}
+
+
+// date type is ambigous
+type Date struct {
+ Date string
 }
 
 type SortType string
@@ -61,20 +60,23 @@ func (st SortType) IsValid() error {
 	}
 	return errors.New("Invalid leave type")
 }
-// hot string "hot"
-// top string "new"
-// rising string "new"
-// new string "new"
-
 // export interface IAPIUrl {
 // 	AccessToken: string;
 // 	GetData: string;
 // }
 
+type IAPIUrl struct {
+	AccessToken, GetData string
+}
+
 // export interface IAccessTokenResult {
 // 	access_token: string;
 // 	expires_in: number;
 // }
+
+type IAccessTokenResult struct {
+	access_token, expires_in string
+}
 
 // export interface IPageListingResult {
 // 	kind: string;
@@ -85,5 +87,22 @@ func (st SortType) IsValid() error {
 // 		selftext: string;
 // 	};
 // }
+// unsure if this is a good translation
+type IPageListingResult struct {
+	kind string
+	data PageDataListing
+}
+
+type PageDataListing struct {
+	created int
+	created_utc int
+	title string
+	selftext string
+}
+
 
 // export interface IPageListingResults extends Array<IPageListingResult> {}
+
+type IPageListingResults struct {
+	IPageListingResults []IPageListingResult
+}
