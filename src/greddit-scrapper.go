@@ -23,119 +23,93 @@ type GredditScraper struct {
 	AuthToken string
 	NextPage string 
 	PreviousPage string
-	API_URL IAPIURL
-}
+	// API_URL IAPIURL
 
-type IAPIURL string
 
-const (
-	AccessToken IAPIURL =  "https://www.reddit.com/api/v1/access_token"
-	GetData IAPIURL = "https://oauth.reddit.com/r/"
-)
-
-func (apit *IAPIURL) UnmarshalJSON(b []byte) error {
-	var s string
-	json.Unmarshal(b, &s)
-	API_URL := IAPIURL(s)
-	switch API_URL {
-	case AccessToken, GetData:
-			*apit = API_URL
-			return nil
-	}
-	return errors.New("invalid sort type")
-}
-
-func (apit IAPIURL) IsValid() error {
-	switch apit {
-	case AccessToken, GetData:
-		return nil
-	}
-	return errors.New("invalid APIURL type")
-}
 // export class RedditScraper {
-
-// 	private AccessToken: string;
-// 	private AuthToken: string;
-// 	private NextPage: string | null = null;
-// 	private PreviousPage: string | null = null;
-
-// 	private static readonly API_URL: IAPIUrl = {
-// 		AccessToken: "https://www.reddit.com/api/v1/access_token",
-// 		GetData: "https://oauth.reddit.com/r/",
-// 	};
-
-// 	constructor(options: IRedditCredentials) {
-// 		this.AuthToken = RedditScraper.createAuthToken(options);
-// 	}
-
-// 	private static createAuthToken(options: IRedditCredentials): string {
-// 		return Buffer.from(`${options.AppId}:${options.AppSecret}`).toString("base64");
-// 	}
-
-// 	public async scrapeData(options: IRequestOptions): Promise<IPageListingResults> {
-
-// 		if (!options.BeforeDate) {
-// 			options.BeforeDate = new Date();
-// 		}
-
-// 		this.AccessToken = await this.getAccessToken();
-
-// 		let finalPageListings: IPageListingResults = [];
-// 		let recordCount: number = 0;
-
-// 		do {
-// 			const pageData = await this.getPage(options);
-
-// 			const listingIsBeforeDateRange = (page: IPageListingResult) =>
-// 					(page.data.created_utc < options.BeforeDate.getTime());
-
-// 			const dataBeforeDateRange = pageData.filter(listingIsBeforeDateRange);
-
-// 			finalPageListings = finalPageListings.concat(dataBeforeDateRange);
-// 			options.FullName = this.NextPage;
-// 			recordCount += options.Records;
-
-// 		} while (options.FullName && recordCount < options.Pages * options.Records);
-
-// 		return finalPageListings;
-// 	}
-
-// 	private async getPage(options: IRequestOptions): Promise<IPageListingResults> {
-
+	
+	// 	private AccessToken: string;
+	// 	private AuthToken: string;
+	// 	private NextPage: string | null = null;
+	// 	private PreviousPage: string | null = null;
+	
+	// 	private static readonly API_URL: IAPIUrl = {
+		// 		AccessToken: "https://www.reddit.com/api/v1/access_token",
+		// 		GetData: "https://oauth.reddit.com/r/",
+		// 	};
+		
+		// 	constructor(options: IRedditCredentials) {
+			// 		this.AuthToken = RedditScraper.createAuthToken(options);
+			// 	}
+			
+			// 	private static createAuthToken(options: IRedditCredentials): string {
+				// 		return Buffer.from(`${options.AppId}:${options.AppSecret}`).toString("base64");
+				// 	}
+				
+				// 	public async scrapeData(options: IRequestOptions): Promise<IPageListingResults> {
+					
+					// 		if (!options.BeforeDate) {
+						// 			options.BeforeDate = new Date();
+						// 		}
+						
+						// 		this.AccessToken = await this.getAccessToken();
+						
+						// 		let finalPageListings: IPageListingResults = [];
+						// 		let recordCount: number = 0;
+						
+						// 		do {
+							// 			const pageData = await this.getPage(options);
+							
+							// 			const listingIsBeforeDateRange = (page: IPageListingResult) =>
+							// 					(page.data.created_utc < options.BeforeDate.getTime());
+							
+							// 			const dataBeforeDateRange = pageData.filter(listingIsBeforeDateRange);
+							
+							// 			finalPageListings = finalPageListings.concat(dataBeforeDateRange);
+							// 			options.FullName = this.NextPage;
+							// 			recordCount += options.Records;
+							
+							// 		} while (options.FullName && recordCount < options.Pages * options.Records);
+							
+							// 		return finalPageListings;
+							// 	}
+							
+							// 	private async getPage(options: IRequestOptions): Promise<IPageListingResults> {
+								
 // 		const finalUrl: string = `${RedditScraper.API_URL.GetData}${options.SubReddit}/${options.SortType}/`;
 
 // 		const requestOptions: RequestPromiseOptions = {
-// 			json: true,
-// 			headers: {
-// 				"Authorization": `Bearer ${this.AccessToken}`,
-// 				"User-Agent": "RedditScraper",
-// 			},
-// 		};
-
-// 		if (options.FullName) {
-// 			requestOptions.qs = {
-// 				after: options.FullName,
-// 			};
-// 		}
-
-// 		const pageData = await Request.get(finalUrl, requestOptions);
-// 		this.NextPage = pageData.data.after;
-// 		this.PreviousPage = pageData.data.before;
-
-// 		return pageData.data.children;
-// 	}
-
-// 	private async getAccessToken(): Promise<string> {
-
-// 		const options: RequestPromiseOptions = {
-// 			formData: {
-// 				grant_type: "client_credentials",
-// 				device_id: "DO_NOT_TRACK_THIS_DEVICE",
-// 			},
-// 			json: true,
-// 			headers: {
-// 				Authorization: `Basic ${this.AuthToken}`,
-// 			},
+	// 			json: true,
+	// 			headers: {
+		// 				"Authorization": `Bearer ${this.AccessToken}`,
+		// 				"User-Agent": "RedditScraper",
+		// 			},
+		// 		};
+		
+		// 		if (options.FullName) {
+			// 			requestOptions.qs = {
+				// 				after: options.FullName,
+				// 			};
+				// 		}
+				
+				// 		const pageData = await Request.get(finalUrl, requestOptions);
+				// 		this.NextPage = pageData.data.after;
+				// 		this.PreviousPage = pageData.data.before;
+				
+				// 		return pageData.data.children;
+				// 	}
+				
+				// 	private async getAccessToken(): Promise<string> {
+					
+					// 		const options: RequestPromiseOptions = {
+						// 			formData: {
+							// 				grant_type: "client_credentials",
+							// 				device_id: "DO_NOT_TRACK_THIS_DEVICE",
+							// 			},
+							// 			json: true,
+							// 			headers: {
+								// 				Authorization: `Basic ${this.AuthToken}`,
+								// 			},
 // 		};
 
 // 		const accessTokenData: IAccessTokenResult = await Request.post(RedditScraper.API_URL.AccessToken, options);
@@ -143,3 +117,13 @@ func (apit IAPIURL) IsValid() error {
 // 	}
 
 // }
+}
+func (g GredditScraper) GetAccessToken() string {
+	AccessToken := "https://www.reddit.com/api/v1/access_token"
+	return AccessToken
+}
+
+func (g GredditScraper) GetData() string {
+	GetData := "https://oauth.reddit.com/r/"
+	return GetData
+}
