@@ -15,22 +15,8 @@ type GredditScraper struct {
 
 	// export class RedditScraper {
 
-	// 	private AccessToken: string;
-	// 	private AuthToken: string;
-	// 	private NextPage: string | null = null;
-	// 	private PreviousPage: string | null = null;
-
-	// 	private static readonly API_URL: IAPIUrl = {
-	// 		AccessToken: "https://www.reddit.com/api/v1/access_token",
-	// 		GetData: "https://oauth.reddit.com/r/",
-	// 	};
-
 	// 	constructor(options: IRedditCredentials) {
 	// 		this.AuthToken = RedditScraper.createAuthToken(options);
-	// 	}
-
-	// 	private static createAuthToken(options: IRedditCredentials): string {
-	// 		return Buffer.from(`${options.AppId}:${options.AppSecret}`).toString("base64");
 	// 	}
 
 	// 	private async getPage(options: IRequestOptions): Promise<IPageListingResults> {
