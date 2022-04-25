@@ -119,23 +119,18 @@ func (g GredditScraper) scrapeData(options IRequestOptions) map[string]string {
 		const pageData = g.getPage(options)                                   //need to decide type
 		filter(pageData, listingIsBeforeDateRange) // need to decide type
 		for _, value: range pageData{
-			if pageData.includes(listingIsBeforeDateRange) {
+			if (listingIsBeforeDateRange(value, options)) {
 				// append element at this index to list otherwise continue looping
 			}
 
 		}
 		const dataBeforeDateRange = 
 		finalPageListings = finalPageListings + dataBeforeDateRange
+		options.FullName = g.NextPage
+		recordCount += options.Records
 
 	}
 
-	// 			finalPageListings = finalPageListings.concat(dataBeforeDateRange);
-	// 			options.FullName = this.NextPage;
-	// 			recordCount += options.Records;
-
-	// 		} while (options.FullName && recordCount < options.Pages * options.Records);
-
-	// 		return finalPageListings;
+			return finalPageListings;
 }
 
-// 	}
