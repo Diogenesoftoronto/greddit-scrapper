@@ -100,18 +100,14 @@ func listingIsBeforeDateRange(page IPageListingResult, options IRequestOptions) 
 	return page.data.created_utc < options.BeforeDate.getTime()
 }
 
-// 			const listingIsBeforeDateRange = (page: IPageListingResult) =>
-// 					(page.data.created_utc < options.BeforeDate.getTime());
+
 func (g GredditScraper) scrapeData(options IRequestOptions) map[string]string {
 
 	if !options.BeforeDate {
 		options.BeforeDate = time.Now() //probably will break need proper time figure out date function return in js
 	}
 
-	// 		this.AccessToken = await this.getAccessToken();
 	g.AccessToken = g.GetAccessToken()
-	// 		let finalPageListings: IPageListingResults = [];
-	// 		let recordCount: number = 0;
 	recordCount := 0
 	var finalPageListings IPageListingResults
 
