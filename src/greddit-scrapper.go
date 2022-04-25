@@ -59,29 +59,24 @@ type GredditScraper struct {
 	// 	}
 	
 	
-	return accessTokenData.access_token;
 }
 
 // 	private async getAccessToken(): Promise<string> {
 	func (g GredditScraper) getAccessToken() string {
 		const options RequestPromiseOptions = {
-						formData: {
-								grant_type: "client_credentials",
-								device_id: "DO_NOT_TRACK_THIS_DEVICE",
-							},
-							json: true,
-							headers: {
-									Authorization: `Basic ${this.AuthToken}`,
-								},
-							};
+			formData: {
+				grant_type: "client_credentials",
+				device_id: "DO_NOT_TRACK_THIS_DEVICE",
+			},
+			json: true,
+			headers: {
+				Authorization: `Basic ${this.AuthToken}`,
+			},
+			};
+			const accessTokenData IAccessTokenResult = Request.post(RedditScraper.API_URL.AccessToken, options);
+			return accessTokenData.access_token;
 		}
-	
-			const options: RequestPromiseOptions = {
 				
-					}
-				const accessTokenData IAccessTokenResult = Request.post(RedditScraper.API_URL.AccessToken, options);
-				}
-	
 	func (g GredditScraper) GetAccess() string {
 		AccessToken := "https://www.reddit.com/api/v1/access_token"
 	return AccessToken
