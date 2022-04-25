@@ -1,10 +1,6 @@
 package gredditScrapper
 
 // Go-Reddit Scrapper Schema
-// export interface IRedditCredentials {
-// 	AppId: string;
-// 	AppSecret: string;
-// }
 
 import (
 	"encoding/json"
